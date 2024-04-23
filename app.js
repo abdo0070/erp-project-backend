@@ -9,7 +9,7 @@ function start() {
   app.listen(process.env.PORT || 9000, () => {
     console.log("server is listing ...");
   });
-  app.use([router]);
+  app.use(express.urlencoded({extended : true}),[router]);
 }
 
 start();

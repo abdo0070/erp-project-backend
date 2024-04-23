@@ -1,5 +1,4 @@
 const { default: mongoose } = require("mongoose");
-const { type } = require("os");
 
 const Schema = require("mongoose").Schema;
 
@@ -7,9 +6,9 @@ const UserSchema = new Schema({
   name: String,
   email: {
     type: String,
-    required: [true, "Enter Your Email"],
+    required: [true, "Email is required"],
     trim: true,
-    index: true,
+    index: [true, "Email Aleardy Signed in"],
     unique: [true, "Email Aleardy Signed in"],
   },
   password: {
@@ -31,9 +30,9 @@ const UserSchema = new Schema({
       message: "{VALUE} is not supported",
     },
   },
-  addrsss: {
+  address: {
     type: String,
-    required: [true, "Adress is Requierd"],
+    required: [true, "Address is Requierd"],
   },
   skills: [],
   birth_date: { type: Date },
@@ -44,7 +43,8 @@ const UserSchema = new Schema({
       message: "Carrer Level is not Found .",
     },
   },
-  cv_link : String
+  cv_link : String,
+  token : String
 });
 
 

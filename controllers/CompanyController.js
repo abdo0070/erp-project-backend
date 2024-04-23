@@ -1,4 +1,8 @@
 class CompanyController{
-    login = asyncWrapper(() => {});
-    register = asyncWrapper(() => {});
+    login = asyncWrapper(async(req,res,next) => {
+        
+    });
+    register = asyncWrapper(async(req,res,next) => {
+
+    });
 }

@@ -1,26 +1,44 @@
 const { model } = require("mongoose");
 const asyncWrapper = require("../middlewares/asyncWrapper.js");
 const UserModel = require("../model/UserModel.js");
+const genrateToken = require("../JWT/genrateToken.js");
 class UserController {
-  static login = asyncWrapper(async (req, res, next) => {
-    const newUser = await new UserModel.create({
-      email : "abdalla@gmail.com",
-      name : "abdalla",
-      addrsss : "324 sudan st",
-      carrer_level : "Junior",
-      bio : "my name is abdalla I am Junior web developer love my carerr and looking forward to the opporunity :) ",
-      city :"am",
-      birth_date : "",
-      cv_link : "",
-      password : "123",
-      skills : ["react.js" , "PHP", "HTML","CSS"],
-      title : "Fullstack web developer"
+  static register = asyncWrapper(async (req, res, next) => {
+    const newUser = await UserModel.create(req.body);
+    const token = genrateToken(JSON.stringify(newUser));
+    res.json({
+      token,
     });
-    res.json(newUser);
   });
-  static register = asyncWrapper(async () => {});
-  static search = asyncWrapper(async () => {});
+  static all = asyncWrapper(async (req, res, next) => {
+    const users = await UserModel.find({});
+    res.json(users);
+  });
+
+  static login = asyncWrapper(async (req, res, next) => {
+    const { email, password } = req.body;
+    const user = await UserModel.findOne({
+      email: email,
+      password: password,
+    });
+    if (user == null || user == undefined) {
+      return res.status(401).json({ error: "Invalid email or password" });
+    }
+    const token = genrateToken(JSON.stringify(user));
+    res.json({
+      token,
+    });
+  });
+  static search = asyncWrapper(async (req,res,next) => {
+    const {q} = req.params;
+    const users = await UserModel.find({ title: { $regex: new RegExp(q, "i") } });
+    // Respond with the search results
+    res.status(200).json({ success: true, data: users });
+  });
   static singleUser = asyncWrapper(async () => {});
+  static update = asyncWrapper(async (req,res,next) => {
+    
+  });
 }
 
 module.exports = UserController;
