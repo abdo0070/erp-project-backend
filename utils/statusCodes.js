@@ -1,7 +1,7 @@
 const statusCodes = {
     SUCCESS : {
         msg : "SUCCESS",
-        code : "200"
+        code : 200
     },
     FAIL : {
         msg : "FAIL",

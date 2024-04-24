@@ -1,4 +1,3 @@
-const { model } = require("mongoose");
 const asyncWrapper = require("../middlewares/asyncWrapper.js");
 const UserModel = require("../model/UserModel.js");
 const genrateToken = require("../JWT/genrateToken.js");
@@ -7,7 +6,7 @@ class UserController {
     const newUser = await UserModel.create(req.body);
     const token = genrateToken(JSON.stringify(newUser));
     res.json({
-      token,
+      token : "Bearer " + token,
     });
   });
   static all = asyncWrapper(async (req, res, next) => {
@@ -22,11 +21,11 @@ class UserController {
       password: password,
     });
     if (user == null || user == undefined) {
-      return res.status(401).json({ error: "Invalid email or password" });
+      throw Error("WRONG EMAIL OR PASSWORD");
     }
     const token = genrateToken(JSON.stringify(user));
     res.json({
-      token,
+      token : "Bearer " + token,
     });
   });
   static search = asyncWrapper(async (req,res,next) => {
@@ -35,7 +34,7 @@ class UserController {
     // Respond with the search results
     res.status(200).json({ success: true, data: users });
   });
-  static singleUser = asyncWrapper(async () => {});
+  static singleUser = asyncWrapper(async (req,res,next) => {});
   static update = asyncWrapper(async (req,res,next) => {
     
   });

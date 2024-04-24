@@ -1,4 +1,4 @@
-const errorHandler = require("../error/errorHandler");
+const errorHandler = require("./errorHandler");
 const asyncWrapper = (cb) => {
   return async (req, res, next) => {
     try {
