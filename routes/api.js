@@ -8,6 +8,7 @@ router.route("/api/users").all(UserController.all);
 router.post("/api/users/login",UserController.login);
 router.post("/api/users/register",UserController.register);
 router.get("/api/users/search",UserController.search);
+router.get("/api/users/cv/:id",UserController.userCV);
 // COMPANY
 router.post("/api/companies/login",CompanyController.login);
 router.post("/api/companies/register",CompanyController.register);

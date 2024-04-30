@@ -50,13 +50,13 @@ App Features:
 
 ------------------ TOMORROW => DEADLINE 23 / 04 / 2024
 1 - make the start up code for the backend => DONE 
-2 - make the login endpoint and register page for the user 
-3 - make upload and load cv function
-4 - make login and register endpoints for the company
-5 - make searching for cv endpoint => algorithm will be searching by title
+2 - make the login endpoint and register page for the user => DONE 
+3 - make upload and load cv function => PENDING
+4 - make login and register endpoints for the company => DONE
+5 - make searching for cv endpoint => algorithm will be searching by title => PENDING
 6 - make single cv {by id} endpoint
-7 - add JWT 
-8 - make crud for jobs endpoints
+7 - add JWT => DONE 
+8 - make crud for jobs endpoints => PROCCESSING
 9 - make get applications and post application end point 
 10- make the searching endpoint for the jobs
 
