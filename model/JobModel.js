@@ -20,7 +20,13 @@ const JobSchema = new Schema({
     type: Number,
     required: [true, "expected_salary is required"],
   },
-  created_at: new Date.now(),
+  career_level: {
+    type: String,
+    required: [true, "career level is required"],
+  },
+  created_at: {
+    type : Date,
+  },
   company_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Company",

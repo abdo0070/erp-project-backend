@@ -10,7 +10,6 @@ class UserController {
     const filePath = fs.readFileSync(
       "C:\\Users\\Mmdou\\Desktop\\ERP Project\\backend\\cv.pdf"
     );
-    const pdfBinary = new Binar
     const cv = await CvModel.create({
       cv_name: "Resume",
       contentType: "application.pdf",
@@ -54,7 +53,9 @@ class UserController {
     res.status(200).json({ success: true, data: users });
   });
   static singleUser = asyncWrapper(async (req, res, next) => {});
+
   static update = asyncWrapper(async (req, res, next) => {});
+
   static userCV = asyncWrapper(async (req, res, next) => {
     const {id} = req.params;
     const cv = await CvModel.findOne({user_id : id});
@@ -64,6 +65,9 @@ class UserController {
       },
     });
   });
+   static applicationApply = asyncWrapper(async(req,res,next)=> {
+
+   })
 }
 
 module.exports = UserController;

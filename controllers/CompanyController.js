@@ -34,6 +34,12 @@ class CompanyController {
       token: token,
     });
   });
+  static all = asyncWrapper(async (req,res,next) => {
+    const companies = await CompanyModel.find({});
+    res.json({
+      data : companies
+    })
+  })
 }
 
 module.exports = CompanyController;

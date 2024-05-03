@@ -1,4 +1,5 @@
 const CompanyController = require("../controllers/CompanyController");
+const JobController = require("../controllers/JobController");
 const UserController = require("../controllers/UserController");
 
 const router = require("express").Router();
@@ -13,6 +14,19 @@ router.get("/api/users/cv/:id",UserController.userCV);
 router.post("/api/companies/login",CompanyController.login);
 router.post("/api/companies/register",CompanyController.register);
 
+router.get("/api/companies",CompanyController.all);
+router.get("/api/companies/jobs/:company_id",JobController.companyJobs);
+
+// JOB
+router.route("/api/jobs")
+.get(JobController.all)
+.post(JobController.store)
+.patch(JobController.update)
+.delete(JobController.delete)
+
+router.get("/api/jobs/:jobId",JobController.singleJob);
+
+// APPLICATION
 router.get("*", (req, res) => {
   res.send("not found");
 });
