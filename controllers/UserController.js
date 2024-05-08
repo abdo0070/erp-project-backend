@@ -15,18 +15,21 @@ class UserController {
       contentType: "application.pdf",
       uploadDate: new Date(),
       data: filePath,
-      user_id : newUser.id,
+      user_id: newUser.id,
     });
     const token = genrateToken(JSON.stringify(newUser));
     res.json({
       token: "Bearer " + token,
-      cv,
+      data : cv,
     });
   });
 
   static all = asyncWrapper(async (req, res, next) => {
     const users = await UserModel.find({});
-    res.json(users);
+    res.json({
+      msg : "SUCCESS",
+      data : users
+    });
   });
 
   static login = asyncWrapper(async (req, res, next) => {
@@ -41,6 +44,7 @@ class UserController {
     const token = genrateToken(JSON.stringify(user));
     res.json({
       token: "Bearer " + token,
+      role: 1,
     });
   });
 
@@ -52,22 +56,27 @@ class UserController {
     // Respond with the search results
     res.status(200).json({ success: true, data: users });
   });
-  static singleUser = asyncWrapper(async (req, res, next) => {});
+  static singleUser = asyncWrapper(async (req, res, next) => {
+    const { id } = req.params;
+    const user = await UserModel.findById("6633763ed4e5df9212cb340e");
+    res.json({
+      data: user,
+      msg: "SUCCESS",
+    });
+  });
 
   static update = asyncWrapper(async (req, res, next) => {});
 
   static userCV = asyncWrapper(async (req, res, next) => {
-    const {id} = req.params;
-    const cv = await CvModel.findOne({user_id : id});
+    const { id } = req.params;
+    const cv = await CvModel.findOne({ user_id: id });
     res.json({
       data: {
         cv,
       },
     });
   });
-   static applicationApply = asyncWrapper(async(req,res,next)=> {
-
-   })
+  static applicationApply = asyncWrapper(async (req, res, next) => {});
 }
 
 module.exports = UserController;
