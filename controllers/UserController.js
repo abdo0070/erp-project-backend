@@ -6,29 +6,27 @@ const CvModel = require("../model/CvModel.js");
 class UserController {
   static register = asyncWrapper(async (req, res, next) => {
     const newUser = await UserModel.create(req.body);
-    // const filePath = path.resolve('../cv.pdf');
-    const filePath = fs.readFileSync(
-      "C:\\Users\\Mmdou\\Desktop\\ERP Project\\backend\\cv.pdf"
-    );
-    const cv = await CvModel.create({
-      cv_name: "Resume",
-      contentType: "application.pdf",
-      uploadDate: new Date(),
-      data: filePath,
-      user_id: newUser.id,
-    });
+    // const filePath = path.resolve("../cv.pdf");
+    // const fileData = fs.readFileSync(filePath);
+    // const cv = await CvModel.create({
+    //   cv_name: "Resume",
+    //   contentType: "application.pdf",
+    //   uploadDate: new Date(),
+    //   data: fileData,
+    //   user_id: newUser.id,
+    // });
     const token = genrateToken(JSON.stringify(newUser));
     res.json({
-      token: "Bearer " + token,
-      data : cv,
+      token: token,
+      data: newUser,
     });
   });
 
   static all = asyncWrapper(async (req, res, next) => {
     const users = await UserModel.find({});
     res.json({
-      msg : "SUCCESS",
-      data : users
+      msg: "SUCCESS",
+      data: users,
     });
   });
 
@@ -43,7 +41,7 @@ class UserController {
     }
     const token = genrateToken(JSON.stringify(user));
     res.json({
-      token: "Bearer " + token,
+      token: token,
       role: 1,
     });
   });
