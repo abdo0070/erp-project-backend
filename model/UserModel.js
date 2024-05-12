@@ -39,7 +39,7 @@ const UserSchema = new Schema({
   },
   skills: [],
   birth_date: { type: Date },
-  carrer_level: {
+  career_level: {
     type: String,
     required: [true, "carrer_level is Requierd"],
     enum: {
