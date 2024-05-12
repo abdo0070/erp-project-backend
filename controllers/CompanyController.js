@@ -19,12 +19,13 @@ class CompanyController {
     });
   });
   static register = asyncWrapper(async (req, res, next) => {
-    const { name, email, password, emp_size, image } = req.body;
+    const { name, email, password, emp_size, address ,  image } = req.body;
     const newCompany = await CompanyModel.create({
       name,
       email,
       password,
       emp_size,
+      address,
       image,
     });
     // Genrate the Token

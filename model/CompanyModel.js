@@ -17,6 +17,10 @@ const CompanySchema = new Schema({
     type: String,
     required: [true, "Password is Required"],
   },
+  address: {
+    type: String,
+    required: [true, "address is Required"],
+  },
   token: String,
   image: String,
   emp_size: {
@@ -29,4 +33,4 @@ const CompanySchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('Company',CompanySchema);
+module.exports = mongoose.model("Company", CompanySchema);

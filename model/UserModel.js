@@ -28,7 +28,7 @@ const UserSchema = new Schema({
   bio: String,
   city: {
     enum: {
-      type : String,
+      type: String,
       values: ["Cairo", "Aswan", "Alexandria", "Giza"],
       message: "{VALUE} is not supported",
     },
@@ -41,14 +41,17 @@ const UserSchema = new Schema({
   birth_date: { type: Date },
   carrer_level: {
     type: String,
+    required: [true, "carrer_level is Requierd"],
     enum: {
       values: ["Senior", "Junior", "Student", "Mid-level"],
       message: "Carrer Level is not Found .",
     },
   },
-  cv_link : String,
-  token : String
+  job_type: {
+    type: String,
+  },
+  cv_link: String,
+  token: String,
 });
 
-
-module.exports = mongoose.model('User',UserSchema);
+module.exports = mongoose.model("User", UserSchema);
