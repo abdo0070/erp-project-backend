@@ -16,10 +16,11 @@ class CompanyController {
     res.json({
       msg: "SUCCESS LOGIN",
       token: token,
+      user: company,
     });
   });
   static register = asyncWrapper(async (req, res, next) => {
-    const { name, email, password, emp_size, address ,  image } = req.body;
+    const { name, email, password, emp_size, address, image } = req.body;
     const newCompany = await CompanyModel.create({
       name,
       email,
@@ -35,12 +36,21 @@ class CompanyController {
       token: token,
     });
   });
-  static all = asyncWrapper(async (req,res,next) => {
+  static all = asyncWrapper(async (req, res, next) => {
     const companies = await CompanyModel.find({});
     res.json({
-      data : companies
+      data: companies,
+    });
+  });
+
+
+  static singleCompany = asyncWrapper(async (req,res,next) => {
+    const {id} = req.params;
+    const company = await CompanyModel.findById(id);
+    res.json({
+      data : company
     })
-  })
+  });
 }
 
 module.exports = CompanyController;

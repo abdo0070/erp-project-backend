@@ -42,6 +42,7 @@ class UserController {
     const token = genrateToken(JSON.stringify(user));
     res.json({
       token: token,
+      user,
       role: 1,
     });
   });
@@ -56,7 +57,6 @@ class UserController {
   });
   static singleUser = asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    console.log(id);
     const user = await UserModel.findById(id);
     res.json({
       data: user,

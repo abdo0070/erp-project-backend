@@ -21,6 +21,7 @@ router.get("/api/users/:id", verifyJWT, UserController.singleUser);
 
 // COMPANY
 router.get("/api/companies", [verifyJWT, CompanyController.all]);
+router.get("/api/companies/:id", [verifyJWT, CompanyController.singleCompany]);
 router.get("/api/companies/jobs/:company_id", [
   verifyJWT,
   JobController.companyJobs,
@@ -36,11 +37,16 @@ router.get("/api/jobs/:jobId", verifyJWT, JobController.singleJob);
 router.delete("/api/jobs/:jobId", verifyJWT, JobController.delete);
 
 // APPLICATION
-router.post("/api/applications",ApplicationController.store);
-router.get("/api/applications/job/:jobId",ApplicationController.jobApplications);
-router.get("/api/applications/user/:userId",ApplicationController.userApplications);
-router.get("/api/applications/:id",ApplicationController.singleApplications);
-
+router.post("/api/applications", ApplicationController.store);
+router.get(
+  "/api/applications/job/:jobId",
+  ApplicationController.jobApplications
+);
+router.get(
+  "/api/applications/user/:userId",
+  ApplicationController.userApplications
+);
+router.get("/api/applications/:id", ApplicationController.singleApplications);
 
 router.get("*", (req, res) => {
   res.send("not found");
