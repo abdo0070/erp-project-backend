@@ -11,6 +11,7 @@ class JobController {
       expected_salary,
       job_type,
       skills,
+      description,
       location,
     } = req.body;
     // GET THE COMPANY ID FROM THE TOKEN
@@ -20,6 +21,7 @@ class JobController {
       career_level,
       expected_salary,
       job_type,
+      description,
       skills,
       location,
     });
@@ -61,7 +63,7 @@ class JobController {
     ]);
 
     res.json({
-      data: job,
+      data: job[0],
     });
   });
   static companyJobs = asyncWrapper(async (req, res, next) => {
@@ -87,8 +89,8 @@ class JobController {
     });
   });
   static delete = asyncWrapper(async (req, res, next) => {
-    const { id } = req.body;
-    const job = await JobModel.findByIdAndDelete(id);
+    const { jobId } = req.params;
+    const job = await JobModel.findByIdAndDelete(jobId);
     res.status(202).json({
       data: job,
     });

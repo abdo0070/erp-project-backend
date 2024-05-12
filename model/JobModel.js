@@ -24,14 +24,19 @@ const JobSchema = new Schema({
     type: String,
     required: [true, "career level is required"],
   },
+  description: {
+    type: String,
+    required: [true, "job description is required"],
+  },
   created_at: {
-    type : Date,
+    type: Date,
   },
   company_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Company",
     required: [true, "Invaild company data ."],
   },
+  post_date: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model("Job", JobSchema);

@@ -31,8 +31,8 @@ router
   .get(verifyJWT, JobController.all)
   .post(verifyJWT, JobController.store)
   .patch(verifyJWT, JobController.update)
-  .delete(verifyJWT, JobController.delete);
 router.get("/api/jobs/:jobId", verifyJWT, JobController.singleJob);
+router.delete("/api/jobs/:jobId", verifyJWT, JobController.delete);
 
 // APPLICATION
 router.get("*", (req, res) => {

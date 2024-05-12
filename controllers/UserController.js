@@ -56,7 +56,8 @@ class UserController {
   });
   static singleUser = asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    const user = await UserModel.findById("6633763ed4e5df9212cb340e");
+    console.log(id);
+    const user = await UserModel.findById(id);
     res.json({
       data: user,
       msg: "SUCCESS",
