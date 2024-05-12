@@ -7,10 +7,10 @@ const ApplicationSchema = new Schema({
     type: String,
     default: "PENDING",
   },
-  created_at: Date,
+  created_at: { type: Date, default: Date.now },
   job_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Company",
+    ref: "Job",
     required: [true, "Invaild Job data ."],
   },
   user_id: {

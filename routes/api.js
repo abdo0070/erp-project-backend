@@ -1,3 +1,4 @@
+const ApplicationController = require("../controllers/ApplicationController");
 const CompanyController = require("../controllers/CompanyController");
 const JobController = require("../controllers/JobController");
 const UserController = require("../controllers/UserController");
@@ -35,6 +36,12 @@ router.get("/api/jobs/:jobId", verifyJWT, JobController.singleJob);
 router.delete("/api/jobs/:jobId", verifyJWT, JobController.delete);
 
 // APPLICATION
+router.post("/api/applications",ApplicationController.store);
+router.get("/api/applications/job/:jobId",ApplicationController.jobApplications);
+router.get("/api/applications/user/:userId",ApplicationController.userApplications);
+router.get("/api/applications/:id",ApplicationController.singleApplications);
+
+
 router.get("*", (req, res) => {
   res.send("not found");
 });

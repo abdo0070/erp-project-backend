@@ -36,6 +36,14 @@ const JobSchema = new Schema({
     ref: "Company",
     required: [true, "Invaild company data ."],
   },
+  veiwed_num : {
+    type : Number,
+    default : 0
+  },
+  applied_num : {
+    type : Number,
+    default : 0
+  },
   post_date: { type: Date, default: Date.now },
 });
 
