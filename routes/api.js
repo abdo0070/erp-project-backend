@@ -30,9 +30,9 @@ router.get("/api/companies/jobs/:company_id", [
 router
   .route("/api/jobs")
   .get(verifyJWT, JobController.all)
-  .post(verifyJWT, JobController.store)
-  .patch(verifyJWT, JobController.update);
+  .post(verifyJWT, JobController.store);
 router.get("/api/jobs/:jobId", verifyJWT, JobController.singleJob);
+router.patch("/api/jobs/:jobId", verifyJWT, JobController.update);
 router.delete("/api/jobs/:jobId", verifyJWT, JobController.delete);
 
 // APPLICATION

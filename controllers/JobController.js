@@ -97,8 +97,8 @@ class JobController {
   });
 
   static update = asyncWrapper(async (req, res, next) => {
-    const {id} = req.body;
-    const job = await JobModel.findByIdAndUpdate(id, req.body);
+    const { jobId } = req.params;
+    const job = await JobModel.findByIdAndUpdate(jobId, req.body);
     res.json({
       data: job,
     });
