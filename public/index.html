@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Endpoints</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            margin-top: 20px;
+            margin-bottom: 5px;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>API Endpoints</h1>
+
+    <h2>Authentication</h2>
+    <pre>
+    POST /api/users/login
+    POST /api/users/register
+    POST /api/companies/login
+    POST /api/companies/register
+  </pre>
+
+    <h2>Users</h2>
+    <pre>
+    GET /api/users
+    GET /api/users/search
+    GET /api/users/cv/:id
+    GET /api/users/:id
+  </pre>
+
+    <h2>Companies</h2>
+    <pre>
+    GET /api/companies
+    GET /api/companies/:id
+    GET /api/companies/jobs/:company_id
+  </pre>
+
+    <h2>Jobs</h2>
+    <pre>
+    GET /api/jobs
+    POST /api/jobs
+    PATCH /api/jobs
+    GET /api/jobs/:jobId
+    DELETE /api/jobs/:jobId
+  </pre>
+
+    <h2>Applications</h2>
+    <pre>
+    POST /api/applications
+    GET /api/applications/job/:jobId
+    GET /api/applications/user/:userId
+    GET /api/applications/:id
+  </pre>
+
+    <h2>Not Found</h2>
+    <pre>
+    All other routes
+  </pre>
+</body>
+
+</html>

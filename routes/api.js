@@ -3,7 +3,6 @@ const CompanyController = require("../controllers/CompanyController");
 const JobController = require("../controllers/JobController");
 const UserController = require("../controllers/UserController");
 const verifyJWT = require("../middlewares/verifyJWT");
-
 const router = require("express").Router();
 
 // AUTH

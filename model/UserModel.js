@@ -41,9 +41,9 @@ const UserSchema = new Schema({
   birth_date: { type: Date },
   career_level: {
     type: String,
-    required: [true, "carrer_level is Requierd"],
+    required: [true, "Career-Level is Requierd"],
     enum: {
-      values: ["Senior", "Junior", "Student", "Mid-level"],
+      values: ["senior", "junior", "student", "mid-level"],
       message: "Carrer Level is not Found .",
     },
   },

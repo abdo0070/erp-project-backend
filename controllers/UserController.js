@@ -5,16 +5,8 @@ const fs = require("fs");
 const CvModel = require("../model/CvModel.js");
 class UserController {
   static register = asyncWrapper(async (req, res, next) => {
+    console.log(req.body);
     const newUser = await UserModel.create(req.body);
-    // const filePath = path.resolve("../cv.pdf");
-    // const fileData = fs.readFileSync(filePath);
-    // const cv = await CvModel.create({
-    //   cv_name: "Resume",
-    //   contentType: "application.pdf",
-    //   uploadDate: new Date(),
-    //   data: fileData,
-    //   user_id: newUser.id,
-    // });
     const token = genrateToken(JSON.stringify(newUser));
     res.json({
       token: token,

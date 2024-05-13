@@ -5,8 +5,10 @@ require('./JWT/genrateToken.js')
 const app = express();
 require("./db/connect");
 const router = require('./routes/api.js');
+const path = require('path');
 
 function start() {
+  app.use(express.static(path.join(__dirname, 'public')));
   app.listen(process.env.PORT || 9000, () => {
     console.log("server is listing ...");
   });
