@@ -80,7 +80,10 @@ class ApplicationController {
 
   static updateViewedApplications = asyncWrapper(async (req, res, next) => {
     const { id } = req.params;
-    await ApplicationModel.findByIdAndUpdate(id, { status: "VIEWED" }, { new: true });
+    const application = await ApplicationModel.findByIdAndUpdate(id, { status: "VIEWED" }, { new: true });
+    await JobModel.findByIdAndUpdate(application.job_id, {
+      veiwed_num: 1,
+    });
     res.json({
       msg: "SUCCESS",
     });
