@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const asyncWrapper = require("../middlewares/asyncWrapper");
 const JobModel = require("../model/JobModel");
+const ApplicationModel = require("../model/ApplicationModel");
 
 class JobController {
   static store = asyncWrapper(async (req, res, next) => {
@@ -95,12 +96,37 @@ class JobController {
       data: job,
     });
   });
-
   static update = asyncWrapper(async (req, res, next) => {
     const { jobId } = req.params;
     const job = await JobModel.findByIdAndUpdate(jobId, req.body);
     res.json({
       data: job,
+    });
+  });
+
+  static getAllApplicationsForJob = asyncWrapper(async (req, res, next) => {
+    const { jobId } = req.params;
+    const job = await JobModel.findById(jobId);
+    const applications = await ApplicationModel.find({
+      job_id: jobId,
+    }).populate({
+      path: "user_id",
+      model: "User",
+      select: "-password",
+    });
+    const applicationsWithDetails = applications.map((application) => {
+      return {
+        application_id: application._id,
+        status: application.status,
+        created_at: application.created_at,
+        job_title: job.title,
+        job_type: job.job_type,
+        user: application.user_id,
+      };
+    });
+    res.json({
+      msg: "SUCCESS",
+      data: applicationsWithDetails,
     });
   });
 }

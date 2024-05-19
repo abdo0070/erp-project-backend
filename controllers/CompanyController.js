@@ -51,6 +51,15 @@ class CompanyController {
       data : company
     })
   });
+
+  static update = asyncWrapper(async (req, res, next) => {
+    const { id } = req.params;
+    const company = await CompanyController.findByIdAndUpdate(id, req.body);
+    res.json({
+      msg: "SUCCESS",
+      data: company,
+    });
+  });
 }
 
 module.exports = CompanyController;

@@ -41,6 +41,7 @@ class UserController {
 
   static search = asyncWrapper(async (req, res, next) => {
     const { q } = req.params;
+    console.log(q);
     const users = await UserModel.find({
       title: { $regex: new RegExp(q, "i") },
     });
@@ -56,7 +57,14 @@ class UserController {
     });
   });
 
-  static update = asyncWrapper(async (req, res, next) => {});
+  static update = asyncWrapper(async (req, res, next) => {
+    const { id } = req.params;
+    const user = await UserModel.findByIdAndUpdate(id, req.body);
+    res.json({
+      msg: "SUCCESS",
+      data: user,
+    });
+  });
 
   static userCV = asyncWrapper(async (req, res, next) => {
     const { id } = req.params;

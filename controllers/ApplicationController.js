@@ -1,3 +1,4 @@
+const { application } = require("express");
 const asyncWrapper = require("../middlewares/asyncWrapper");
 const ApplicationModel = require("../model/ApplicationModel");
 const JobModel = require("../model/JobModel");
@@ -10,9 +11,9 @@ class ApplicationController {
     };
     const application = await ApplicationModel.create(newApplication);
     // INCREAMENT THE JOB APPLIED NUMBER
-    // await JobModel.findByIdAndUpdate(id,{
-    //     applied_num : applied_num+1
-    // })
+    await JobModel.findByIdAndUpdate(newApplication.job_id, {
+      applied_num: 1,
+    });
     res.json({
       msg: "SUCCESS",
       data: application,
@@ -74,6 +75,14 @@ class ApplicationController {
       });
     res.json({
       data: application,
+    });
+  });
+
+  static updateViewedApplications = asyncWrapper(async (req, res, next) => {
+    const { id } = req.params;
+    await ApplicationModel.findByIdAndUpdate(id, { status: "VIEWED" }, { new: true });
+    res.json({
+      msg: "SUCCESS",
     });
   });
 }
